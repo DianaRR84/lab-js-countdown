@@ -25,12 +25,20 @@ function startCountdown() {
   // Display the initial countdown value
   document.getElementById('time').textContent = remainingTime;
 
+  // Show the initial message at the start of the countdown
+  showToast("⏰ Final countdown! ⏰");
+
   // Start the countdown interval
   timer = setInterval(() => {
     remainingTime--;
 
     // Update the time display
     document.getElementById('time').textContent = remainingTime;
+
+    // Show different messages based on the remaining time
+    if (remainingTime === 5) {
+      showToast("Start the engines! 💥");
+    }
 
     // Check if time is up
     if (remainingTime <= 0) {
@@ -64,6 +72,11 @@ function showToast(message) {
   // Add the 'show' class to display the toast
   toast.classList.add('show');
 
+  // Clear any previous toast timeout (if any)
+  if (toastTimeout) {
+    clearTimeout(toastTimeout);
+  }
+
   // Set a timeout to automatically remove the 'show' class after 3 seconds
   toastTimeout = setTimeout(() => {
     toast.classList.remove('show');
@@ -82,6 +95,8 @@ function showToast(message) {
     // Remove the 'show' class to hide the toast immediately
     document.getElementById('toast').classList.remove('show');
 });
+
+
   
 
 
